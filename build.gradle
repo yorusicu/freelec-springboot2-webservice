@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.9.RELEASE'
+        springBootVersion = '2.1.7.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -32,10 +32,24 @@ repositories {
 }
 
 dependencies {
+//    implementation 'junit:junit:4.13.1'
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
 
-}
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 
-test {
-    useJUnitPlatform()
+    // lombok constructor 생성 오류시 설정
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.projectlombok:lombok'
 }
+// lombok constructor 생성오류시 설정
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+//test {
+//    useJUnitPlatform()
+//}
